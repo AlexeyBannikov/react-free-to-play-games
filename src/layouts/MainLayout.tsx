@@ -18,7 +18,7 @@ const headerStyle: React.CSSProperties = {
   alignItems: 'center',
 };
 const contentStyle: React.CSSProperties = {
-  height: 'calc(100vh - 50px)',
+  minHeight: 'calc(100vh - 50px)',
   padding: 30,
 };
 
