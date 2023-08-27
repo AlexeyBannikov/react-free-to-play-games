@@ -1,6 +1,7 @@
+import React from 'react';
 import styles from './GamesError.module.css';
 
-const GamesError = () => {
+const GamesError: React.FC = () => {
   return (
     <div className={styles.error}>
       <h2>
