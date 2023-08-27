@@ -1,18 +1,12 @@
 import React from 'react';
 import { Select, Space } from 'antd';
-import { PlatformPropertyEnum, IPlatformItem } from '@/redux/filter/types';
 import { useAppDispatch } from '@/redux/store';
 import { setCurrentPlatform } from '@/redux/filter/slice';
+import { platformList } from './platformList';
 
 interface IPlatformsProps {
   currentPlatform: string;
 }
-
-export const platformList: IPlatformItem[] = [
-  { name: 'All Platforms', platformProperty: PlatformPropertyEnum.ALL },
-  { name: 'Windows (PC)', platformProperty: PlatformPropertyEnum.PC },
-  { name: 'Browser (Web)', platformProperty: PlatformPropertyEnum.BROWSER },
-];
 
 const Platforms: React.FC<IPlatformsProps> = ({ currentPlatform }) => {
   const dispatch = useAppDispatch();

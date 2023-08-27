@@ -1,19 +1,12 @@
 import React from 'react';
 import { Select, Space } from 'antd';
-import { SortPropertyEnum, ISortItem } from '@/redux/filter/types';
 import { useAppDispatch } from '@/redux/store';
 import { setCurrentSort } from '@/redux/filter/slice';
+import { sortList } from './sortList';
 
 interface ISortProps {
   currentSort: string;
 }
-
-const sortList: ISortItem[] = [
-  { name: 'Relevance', sortProperty: SortPropertyEnum.RELEVANCE },
-  { name: 'Popularity', sortProperty: SortPropertyEnum.POPULARITY },
-  { name: 'Release Date', sortProperty: SortPropertyEnum.RELEASE_DATE },
-  { name: 'Alphabetical', sortProperty: SortPropertyEnum.ALPHABETICAL },
-];
 
 const Sort: React.FC<ISortProps> = ({ currentSort }) => {
   const dispatch = useAppDispatch();
