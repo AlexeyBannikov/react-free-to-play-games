@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 const { Header, Content } = Layout;
 
@@ -25,7 +25,9 @@ const contentStyle: React.CSSProperties = {
 const MainLayout: React.FC = () => {
   return (
     <Layout style={layoutStyle}>
-      <Header style={headerStyle}>Free to play games</Header>
+      <Header style={headerStyle}>
+        <Link to='/'>Free to play games</Link>
+      </Header>
       <Content style={contentStyle}>
         <Outlet />
       </Content>
