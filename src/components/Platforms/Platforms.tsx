@@ -1,30 +1,39 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select, Space } from 'antd';
+import { PlatformPropertyEnum, IPlatformItem } from '@/redux/filter/types';
+import { useAppDispatch } from '@/redux/store';
+import { setCurrentPlatform } from '@/redux/filter/slice';
 
-const platformList = ['All Platforms', 'Windows (PC)', 'Browser (Web)'];
+interface IPlatformsProps {
+  currentPlatform: string;
+}
 
-const Platforms: React.FC = () => {
-  const [value, setValue] = React.useState('All Platforms');
+export const platformList: IPlatformItem[] = [
+  { name: 'All Platforms', platformProperty: PlatformPropertyEnum.ALL },
+  { name: 'Windows (PC)', platformProperty: PlatformPropertyEnum.PC },
+  { name: 'Browser (Web)', platformProperty: PlatformPropertyEnum.BROWSER },
+];
 
-  const handleChange = (value: string) => {
-    setValue(value);
+const Platforms: React.FC<IPlatformsProps> = ({ currentPlatform }) => {
+  const dispatch = useAppDispatch();
+
+  const onChangePlatform = (value: number) => {
+    dispatch(setCurrentPlatform(platformList[value]));
   };
 
   return (
-    <div className='filter-wrapper'>
+    <Space size='middle' align='baseline'>
       <span>Platform:</span>
       <Select
-        defaultValue={value}
-        onChange={handleChange}
+        defaultValue={currentPlatform}
         style={{ width: 140 }}
+        onChange={(value: string) => onChangePlatform(+value)}
       >
         {platformList.map((platform, idx) => (
-          <Select.Option key={idx} value={platform}>
-            {platform}
-          </Select.Option>
+          <Select.Option key={idx}>{platform.name}</Select.Option>
         ))}
       </Select>
-    </div>
+    </Space>
   );
 };
 

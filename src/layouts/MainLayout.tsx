@@ -20,7 +20,6 @@ const headerStyle: React.CSSProperties = {
 const contentStyle: React.CSSProperties = {
   height: 'calc(100vh - 50px)',
   padding: 30,
-  fontSize: 16,
 };
 
 const MainLayout: React.FC = () => {

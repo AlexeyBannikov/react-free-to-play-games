@@ -2,9 +2,11 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import game from './game/slice';
+import filter from './filter/slice';
 
 const rootReducer = combineReducers({
   game,
+  filter,
 });
 
 export const store = configureStore({

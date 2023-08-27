@@ -1,0 +1,13 @@
+.filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #fff;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 10px;
+}

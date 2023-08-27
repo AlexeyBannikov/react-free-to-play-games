@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import MainPage from './pages/MainPage/MainPage';
+import HomePage from './pages/HomePage/HomePage';
 import GamePage from './pages/GamePage/GamePage';
 import React from 'react';
 import MainLayout from './layouts/MainLayout';
@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <Routes>
       <Route path='/' element={<MainLayout />}>
-        <Route path='' element={<MainPage />} />
+        <Route path='' element={<HomePage />} />
         <Route path='/game/:id' element={<GamePage />} />
         <Route path='*' element={<NotFound />} />
       </Route>

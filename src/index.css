@@ -22,9 +22,6 @@ a {
   color: inherit;
 }
 
-.filter-wrapper {
-  display: flex;
-  align-items: baseline;
-  flex-direction: row;
-  gap: 8px;
+a:hover {
+  color: inherit;
 }
