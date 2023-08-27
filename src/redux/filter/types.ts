@@ -12,10 +12,16 @@ export enum PlatformPropertyEnum {
 }
 
 export enum GenrePropertyEnum {
-  ALL = 'all',
   MMO = 'mmo',
   MMORPG = 'mmorpg',
   SHOOTER = 'shooter',
+  STRATEGY = 'strategy',
+  MOBA = 'moba',
+  CARD_GAMES = 'card',
+  RACING = 'racing',
+  SPORTS = 'sports',
+  SOCIAL = 'social',
+  FIGHTING = 'fighting',
 }
 
 export interface IPlatformItem {
@@ -24,8 +30,8 @@ export interface IPlatformItem {
 }
 
 export interface IGenreItem {
-  name: string;
-  genreProperty: GenrePropertyEnum;
+  name: string | null;
+  genreProperty: GenrePropertyEnum | null;
 }
 
 export interface ISortItem {
@@ -37,4 +43,5 @@ export interface IFilterSliceState {
   currentPlatform: IPlatformItem;
   currentGenre: IGenreItem;
   currentSort: ISortItem;
+  currentPage: number;
 }

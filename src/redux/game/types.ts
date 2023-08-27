@@ -12,8 +12,9 @@ export interface TGame {
 
 export interface SearchGameParams {
   platform?: string;
-  genre?: string;
-  sort?: string;
+  genre?: string | null;
+  sortBy?: string;
+  page?: number;
 }
 
 export interface IGameSliceState {

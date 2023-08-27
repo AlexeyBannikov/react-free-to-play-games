@@ -5,7 +5,7 @@ import { useAppDispatch } from '@/redux/store';
 import { genreList } from './genreList';
 
 interface IGenresProps {
-  currentGenre: string;
+  currentGenre: string | null;
 }
 
 const Genres: React.FC<IGenresProps> = ({ currentGenre }) => {
@@ -19,7 +19,7 @@ const Genres: React.FC<IGenresProps> = ({ currentGenre }) => {
     <Space size='middle' align='baseline'>
       <span>Genre:</span>
       <Select
-        defaultValue={currentGenre}
+        defaultValue={currentGenre ?? 'All Genres'}
         onChange={(value: string) => onChangeGenre(+value)}
         style={{ width: 140 }}
       >

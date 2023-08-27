@@ -4,7 +4,6 @@ import {
   PlatformPropertyEnum,
   SortPropertyEnum,
   ISortItem,
-  GenrePropertyEnum,
   IGenreItem,
 } from './types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -15,13 +14,14 @@ const initialState: IFilterSliceState = {
     platformProperty: PlatformPropertyEnum.ALL,
   },
   currentGenre: {
-    name: 'All Genres',
-    genreProperty: GenrePropertyEnum.ALL,
+    name: null,
+    genreProperty: null,
   },
   currentSort: {
     name: 'Relevance',
     sortProperty: SortPropertyEnum.RELEVANCE,
   },
+  currentPage: 1,
 };
 
 export const filterSlice = createSlice({
@@ -37,6 +37,9 @@ export const filterSlice = createSlice({
     setCurrentSort(state, action: PayloadAction<ISortItem>) {
       state.currentSort = action.payload;
     },
+    setCurrentPage(state, action: PayloadAction<number>) {
+      state.currentPage = action.payload;
+    },
     setCurrentFilters(state, action: PayloadAction<IFilterSliceState>) {
       state.currentPlatform = action.payload.currentPlatform;
       state.currentGenre = action.payload.currentGenre;
@@ -49,6 +52,7 @@ export const {
   setCurrentPlatform,
   setCurrentGenre,
   setCurrentSort,
+  setCurrentPage,
   setCurrentFilters,
 } = filterSlice.actions;
 

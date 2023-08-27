@@ -29,7 +29,7 @@ const GameBlock: React.FC<IGameBlockProps> = ({
             <span>{genre}</span>
           </div>
           <div className={styles.bottom}>
-            <span>{publisher}</span>
+            <span className={styles.publisher}>{publisher}</span>
             <span>{release_date}</span>
           </div>
         </div>
