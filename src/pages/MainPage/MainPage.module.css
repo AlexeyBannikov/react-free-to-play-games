@@ -1,0 +1,7 @@
+.filters {
+  display: flex;
+  flex-direction: row;
+  gap: 250px;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #fff;
+}

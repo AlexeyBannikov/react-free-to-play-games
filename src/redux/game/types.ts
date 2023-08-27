@@ -1,4 +1,4 @@
-export type TGame = {
+export interface TGame {
   id: number;
   title: string;
   thumbnail: string;
@@ -8,11 +8,11 @@ export type TGame = {
   publisher: string;
   developer: string;
   release_date: string;
-};
+}
 
-export type SearchGameParams = {
+export interface SearchGameParams {
   platform?: string;
-};
+}
 
 export interface IGameSliceState {
   items: TGame[];

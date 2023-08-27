@@ -21,3 +21,10 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.filter-wrapper {
+  display: flex;
+  align-items: baseline;
+  flex-direction: row;
+  gap: 8px;
+}
