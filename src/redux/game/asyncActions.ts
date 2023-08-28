@@ -21,3 +21,23 @@ export const fetchGames = createAsyncThunk<TGame[], SearchGameParams>(
     }
   }
 );
+
+export const fetchGame = createAsyncThunk<TGame, { id: number }>(
+  'game/fetchGameStatus',
+  async (params) => {
+    const { id } = params;
+    let retryCount = 3;
+
+    while (retryCount > 0) {
+      try {
+        const { data } = await http.get('/game', {
+          params: { id },
+        });
+
+        return data;
+      } catch (error) {
+        retryCount--;
+      }
+    }
+  }
+);

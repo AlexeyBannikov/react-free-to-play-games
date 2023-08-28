@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchGames } from './asyncActions';
+import { fetchGame, fetchGames } from './asyncActions';
 import { IGameSliceState, Status } from './types';
 
 const initialState: IGameSliceState = {
-  items: [],
-  status: Status.LOADING,
+  games: [],
+  gamesStatus: Status.LOADING,
+  currentGame: undefined,
+  gameStatus: undefined,
 };
 
 export const gameSlice = createSlice({
@@ -12,18 +14,33 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchGames.pending, (state) => {
-      state.items = [];
-      state.status = Status.LOADING;
-    });
-    builder.addCase(fetchGames.fulfilled, (state, action) => {
-      state.items = action.payload;
-      state.status = Status.SUCCESS;
-    });
-    builder.addCase(fetchGames.rejected, (state) => {
-      state.items = [];
-      state.status = Status.ERROR;
-    });
+    builder
+      //fetch all games
+      .addCase(fetchGames.pending, (state) => {
+        state.games = [];
+        state.gamesStatus = Status.LOADING;
+      })
+      .addCase(fetchGames.fulfilled, (state, action) => {
+        state.games = action.payload;
+        state.gamesStatus = Status.SUCCESS;
+      })
+      .addCase(fetchGames.rejected, (state) => {
+        state.games = [];
+        state.gamesStatus = Status.ERROR;
+      })
+      //fetch current game
+      .addCase(fetchGame.pending, (state) => {
+        state.currentGame = undefined;
+        state.gameStatus = Status.LOADING;
+      })
+      .addCase(fetchGame.fulfilled, (state, action) => {
+        state.currentGame = action.payload;
+        state.gameStatus = Status.SUCCESS;
+      })
+      .addCase(fetchGame.rejected, (state) => {
+        state.currentGame = undefined;
+        state.gameStatus = Status.ERROR;
+      });
   },
 });
 

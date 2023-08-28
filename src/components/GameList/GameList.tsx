@@ -8,13 +8,16 @@ import { Status } from '@/redux/game/types';
 import GamesError from '@/components/GamesError/GamesError';
 import Loader from '@/components/Loader';
 import { fetchGames } from '@/redux/game/asyncActions';
+import GamesNotFound from '@/components/GamesNotFound/GamesNotFound';
 
 const GameList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { items, status } = useAppSelector((state: RootState) => state.game);
+  const { games, gamesStatus } = useAppSelector(
+    (state: RootState) => state.game
+  );
   const { currentPage } = useAppSelector((state: RootState) => state.filter);
   const gamesPerPage = 15;
-  const gamesData = items.length > 0 ? items : [];
+  const gamesData = games.length > 0 ? games : [];
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = gamesData.slice(indexOfFirstGame, indexOfLastGame);
@@ -38,17 +41,17 @@ const GameList: React.FC = () => {
     dispatch(setCurrentPage(page));
   };
 
-  const games = currentGames.map((game) => (
+  const gameList = currentGames.map((game) => (
     <GameBlock key={game.id} {...game} />
   ));
 
   return (
     <>
-      {status === Status.ERROR && <GamesError />}
-      {status === Status.LOADING && <Loader />}
-      {status === Status.SUCCESS && gamesData.length > 0 && (
+      {gamesStatus === Status.ERROR && <GamesError />}
+      {gamesStatus === Status.LOADING && <Loader />}
+      {gamesStatus === Status.SUCCESS && gamesData.length > 0 && (
         <>
-          <div className={styles.wrapper}>{games}</div>
+          <div className={styles.wrapper}>{gameList}</div>
           <Pagination
             style={{
               textAlign: 'center',
@@ -57,14 +60,14 @@ const GameList: React.FC = () => {
             }}
             current={currentPage}
             onChange={(page: number) => handlePageChange(page)}
-            total={items.length}
+            total={games.length}
             pageSize={gamesPerPage}
             showSizeChanger={false}
           />
         </>
       )}
-      {status === Status.SUCCESS && gamesData.length === 0 && (
-        <div>Игры не найдены</div>
+      {gamesStatus === Status.SUCCESS && gamesData.length === 0 && (
+        <GamesNotFound />
       )}
     </>
   );
