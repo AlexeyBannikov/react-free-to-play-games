@@ -9,6 +9,7 @@ import { Button } from 'antd';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GamePage.module.css';
+import { reverseDate } from '@/utils/reverseDate';
 
 const GamePage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const GamePage: React.FC = () => {
     (state: RootState) => state.game
   );
   const { id } = useParams();
+  const releaseDate = reverseDate(currentGame?.release_date ?? '');
 
   useEffect(() => {
     dispatch(fetchGame({ id: +id! }));
@@ -40,7 +42,7 @@ const GamePage: React.FC = () => {
               <img src={currentGame.thumbnail} alt='game photo' />
               <div className={styles.details}>
                 <span className={styles.title}>{currentGame.title}</span>
-                <span>Release date: {currentGame.release_date}</span>
+                <span>Release date: {releaseDate}</span>
                 <span>Publisher: {currentGame.publisher}</span>
                 <span>Developer: {currentGame.developer}</span>
                 <span>Genre: {currentGame.genre}</span>

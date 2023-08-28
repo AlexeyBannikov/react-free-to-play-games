@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './GameBlock.module.css';
+import { reverseDate } from '@/utils/reverseDate';
 
 interface IGameBlockProps {
   id: number;
@@ -19,6 +20,8 @@ const GameBlock: React.FC<IGameBlockProps> = ({
   genre,
   thumbnail,
 }) => {
+  const releaseDate = reverseDate(release_date);
+
   return (
     <div className={styles.wrapper}>
       <Link to={`/game/${id}`} className={styles.block}>
@@ -30,7 +33,7 @@ const GameBlock: React.FC<IGameBlockProps> = ({
           </div>
           <div className={styles.bottom}>
             <span className={styles.publisher}>{publisher}</span>
-            <span>{release_date}</span>
+            <span>{releaseDate}</span>
           </div>
         </div>
       </Link>
