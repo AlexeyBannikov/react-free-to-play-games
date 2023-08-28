@@ -6,11 +6,18 @@ export const fetchGames = createAsyncThunk<TGame[], SearchGameParams>(
   'game/fetchGamesStatus',
   async (params) => {
     const { platform, genre, sortBy } = params;
+    let retryCount = 3;
 
-    const { data } = await http.get('/games', {
-      params: { platform, category: genre, 'sort-by': sortBy },
-    });
+    while (retryCount > 0) {
+      try {
+        const { data } = await http.get('/games', {
+          params: { platform, category: genre, 'sort-by': sortBy },
+        });
 
-    return data;
+        return data;
+      } catch (error) {
+        retryCount--;
+      }
+    }
   }
 );
