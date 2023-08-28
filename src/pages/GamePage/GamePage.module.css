@@ -1,0 +1,42 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.upper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 100px;
+}
+
+.upper img {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  width: 600px;
+  height: 325px;
+}
+
+.leftBlock {
+  background-color: #023047;
+  box-shadow: 0 0 10px #000;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.requirements {
+  display: flex;
+  flex-direction: column;
+}

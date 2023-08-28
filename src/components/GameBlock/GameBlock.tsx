@@ -22,7 +22,7 @@ const GameBlock: React.FC<IGameBlockProps> = ({
   return (
     <div className={styles.wrapper}>
       <Link to={`/game/${id}`} className={styles.block}>
-        <img src={thumbnail} />
+        <img src={thumbnail} alt='game photo' />
         <div className={styles.description}>
           <div className={styles.upper}>
             <span>{title}</span>

@@ -4,10 +4,10 @@ import GameList from '@/components/GameList/GameList';
 
 //TODO: save to url
 //FIXME: remove scroll jumping
-//TODO: three axios request on game page
 //TODO: abort controller
 //TODO: unit tests
-//FIXME: убрать возникновение курсора у текста
+//TODO: local storage 5 min fetch game page
+//FIXME: проверить ошибки
 
 const HomePage: React.FC = () => {
   return (
