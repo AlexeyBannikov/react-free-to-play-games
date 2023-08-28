@@ -1,4 +1,4 @@
-export interface TGame {
+export interface IGame {
   id: number;
   title: string;
   thumbnail: string;
@@ -17,10 +17,12 @@ export interface TGame {
     graphics: string;
     storage: string;
   };
-  screenshots: {
-    id: number;
-    image: string;
-  };
+  screenshots: IScreenshot[];
+}
+
+export interface IScreenshot {
+  id: number;
+  image: string;
 }
 
 export interface SearchGameParams {
@@ -31,9 +33,9 @@ export interface SearchGameParams {
 }
 
 export interface IGameSliceState {
-  games: TGame[];
+  games: IGame[];
   gamesStatus: Status;
-  currentGame: TGame | undefined;
+  currentGame: IGame | undefined;
   gameStatus: Status | undefined;
 }
 

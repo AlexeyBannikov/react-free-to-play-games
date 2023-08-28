@@ -1,5 +1,6 @@
 import GamesError from '@/components/GamesError/GamesError';
 import Loader from '@/components/Loader';
+import ScreenshotsCarousel from '@/components/ScreenshotsCarousel';
 import { fetchGame } from '@/redux/game/asyncActions';
 import { Status } from '@/redux/game/types';
 import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
@@ -64,9 +65,16 @@ const GamePage: React.FC = () => {
                   Storage: {currentGame.minimum_system_requirements.storage}
                 </span>
               </div>
+              <h2>Screenshots Gallery: </h2>
+              <ScreenshotsCarousel>
+                {currentGame.screenshots.map((screenshot) => (
+                  <li key={screenshot.id}>
+                    <img src={screenshot.image} alt='game screenshot' />
+                  </li>
+                ))}
+              </ScreenshotsCarousel>
             </div>
           </div>
-          <div className={styles.bottom}></div>
         </div>
       )}
     </>

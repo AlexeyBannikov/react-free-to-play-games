@@ -1,8 +1,8 @@
 import { http } from '@/api/config';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SearchGameParams, TGame } from './types';
+import { SearchGameParams, IGame } from './types';
 
-export const fetchGames = createAsyncThunk<TGame[], SearchGameParams>(
+export const fetchGames = createAsyncThunk<IGame[], SearchGameParams>(
   'game/fetchGamesStatus',
   async (params) => {
     const { platform, genre, sortBy } = params;
@@ -22,7 +22,7 @@ export const fetchGames = createAsyncThunk<TGame[], SearchGameParams>(
   }
 );
 
-export const fetchGame = createAsyncThunk<TGame, { id: number }>(
+export const fetchGame = createAsyncThunk<IGame, { id: number }>(
   'game/fetchGameStatus',
   async (params) => {
     const { id } = params;

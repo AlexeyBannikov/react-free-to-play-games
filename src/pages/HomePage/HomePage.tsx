@@ -3,7 +3,6 @@ import FilterBlock from '@/components/FilterBlock/FilterBlock';
 import GameList from '@/components/GameList/GameList';
 
 //TODO: save to url
-//FIXME: remove scroll jumping
 //TODO: abort controller
 //TODO: unit tests
 //TODO: local storage 5 min fetch game page

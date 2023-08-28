@@ -11,7 +11,7 @@
   gap: 100px;
 }
 
-.upper img {
+.leftBlock img {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   width: 600px;
@@ -21,6 +21,7 @@
 .leftBlock {
   background-color: #023047;
   box-shadow: 0 0 10px #000;
+  max-height: 510px;
 }
 
 .details {
@@ -39,4 +40,15 @@
 .requirements {
   display: flex;
   flex-direction: column;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.rightBlock img {
+  width: 600px;
+  height: 300px;
 }
