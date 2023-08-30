@@ -1,21 +1,33 @@
 import React from 'react';
-import { Carousel } from 'antd';
+import { Carousel, Image } from 'antd';
+import { IScreenshot } from '@/redux/game/types';
+import styles from '@/pages/GamePage/GamePage.module.css';
 
 const carouselStyle: React.CSSProperties = {
-  width: 600,
-  height: 300,
-  boxShadow: '0 0 10px #000',
+  maxWidth: '80vw',
 };
 
 interface ICarousel {
-  children: React.ReactNode;
+  screenshots: IScreenshot[];
 }
 
-const ScreenshotsCarousel = ({ children }: ICarousel) => {
+const ScreenshotsCarousel = ({ screenshots }: ICarousel) => {
   return (
-    <Carousel autoplay style={carouselStyle}>
-      {children}
-    </Carousel>
+    <div className={styles.carousel}>
+      <Carousel autoplay style={carouselStyle}>
+        {screenshots.map((screenshot) => (
+          <li key={screenshot.id}>
+            <Image
+              src={screenshot.image}
+              alt='game screenshot'
+              style={{
+                width: '100%',
+              }}
+            />
+          </li>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 

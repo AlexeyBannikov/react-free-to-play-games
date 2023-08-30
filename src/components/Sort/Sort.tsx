@@ -3,6 +3,7 @@ import { Select, Space } from 'antd';
 import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
 import { setCurrentSort } from '@/redux/filter/slice';
 import { sortList } from './sortList';
+import styles from '@/components/FilterBlock/FilterBlock.module.css';
 
 interface ISortProps {
   currentSort: string;
@@ -18,7 +19,7 @@ const Sort: React.FC<ISortProps> = () => {
   };
 
   return (
-    <Space size='middle' align='baseline'>
+    <Space size='middle' align='baseline' className={styles.filterBlock}>
       <span>Sort by:</span>
       <Select
         defaultValue={currentSort.name}

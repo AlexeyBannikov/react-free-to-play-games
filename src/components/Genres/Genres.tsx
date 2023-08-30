@@ -3,6 +3,7 @@ import { Select, Space } from 'antd';
 import { setCurrentGenre } from '@/redux/filter/slice';
 import { useAppDispatch } from '@/redux/store';
 import { genreList } from './genreList';
+import styles from '@/components/FilterBlock/FilterBlock.module.css';
 
 interface IGenresProps {
   currentGenre: string | null;
@@ -16,7 +17,7 @@ const Genres: React.FC<IGenresProps> = ({ currentGenre }) => {
   };
 
   return (
-    <Space size='middle' align='baseline'>
+    <Space size='middle' align='baseline' className={styles.filterBlock}>
       <span>Genre:</span>
       <Select
         defaultValue={currentGenre ?? 'All Genres'}

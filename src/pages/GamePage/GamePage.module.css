@@ -1,41 +1,32 @@
 .wrapper {
-  display: flex;
-  flex-direction: column;
   padding: 20px;
-}
-
-.upper {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 100px;
+  gap: 20px;
+  justify-content: center;
 }
 
-.leftBlock img {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  width: 600px;
-  height: 325px;
-}
-
-.leftBlock {
-  background-color: #023047;
+.gameImages img {
   box-shadow: 0 0 10px #000;
-  max-height: 510px;
-  border-radius: 8px;
+  max-width: 80vw;
 }
 
-.details {
+.gameImages {
+  gap: 20px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 20px;
-  font-size: 16px;
 }
 
-.title {
-  font-size: 18px;
-  font-weight: 500;
+.gameDetails {
+  display: flex;
+  flex-direction: column;
+  background-color: #023047;
+  padding: 20px;
+  box-shadow: 0 0 10px #000;
+}
+
+.gameDetails span {
+  font-size: 16px;
 }
 
 .requirements {
@@ -43,13 +34,23 @@
   flex-direction: column;
 }
 
-.bottom {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
+.carousel {
+  max-width: 600px;
 }
 
-.rightBlock img {
-  width: 600px;
-  height: 300px;
+@media (max-width: 988px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .gameImages img {
+    width: 400px;
+  }
+
+  .carousel {
+    max-width: 400px;
+  }
 }
