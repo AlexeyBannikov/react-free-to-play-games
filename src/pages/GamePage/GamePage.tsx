@@ -22,7 +22,12 @@ const GamePage: React.FC = () => {
   const releaseDate = reverseDate(currentGame?.release_date ?? 'N/A');
 
   useEffect(() => {
-    if (localStorage.getItem(String(id))) {
+    if (
+      localStorage.getItem(String(id)) &&
+      new Date().getTime() -
+        JSON.parse(localStorage.getItem(String(id))!).time <=
+        5 * 60 * 1000
+    ) {
       dispatch(setGameStatus(Status.SUCCESS));
       dispatch(
         setCurrentGame(
@@ -30,6 +35,7 @@ const GamePage: React.FC = () => {
         )
       );
     } else {
+      localStorage.removeItem(String(id));
       dispatch(fetchGame({ id: +id! }));
     }
   }, [dispatch]);
@@ -39,26 +45,14 @@ const GamePage: React.FC = () => {
       if (!localStorage.getItem(String(currentGame.id))) {
         localStorage.setItem(
           String(currentGame.id),
-          JSON.stringify({ time: Date.now(), currentGame: currentGame })
+          JSON.stringify({
+            time: new Date().getTime(),
+            currentGame: currentGame,
+          })
         );
       }
     }
   }, [currentGame]);
-
-  useEffect(() => {
-    function checkExpire() {
-      const now = Date.now();
-      const keys = Object.keys(localStorage);
-
-      for (const key of keys) {
-        if (now - JSON.parse(localStorage.getItem(key)!).date >= 300000) {
-          localStorage.removeItem(key);
-        }
-      }
-    }
-
-    setInterval(checkExpire, 60000);
-  }, []);
 
   const navigateToHome = () => {
     navigate('/');
