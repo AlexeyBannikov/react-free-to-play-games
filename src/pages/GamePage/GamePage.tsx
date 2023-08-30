@@ -1,4 +1,3 @@
-import GamesError from '@/components/GamesError/GamesError';
 import Loader from '@/components/Loader';
 import { fetchGame } from '@/redux/game/asyncActions';
 import { Status } from '@/redux/game/types';
@@ -10,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GamePage.module.css';
 import { reverseDate } from '@/utils/reverseDate';
 import ScreenshotsCarousel from '@/components/ScreenshotsCarousel';
+import GameNotFound from '@/components/GamesNotFound/GameNotFound';
 
 const GamePage: React.FC = () => {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const GamePage: React.FC = () => {
       >
         Back to game list
       </Button>
-      {gameStatus === Status.ERROR && <GamesError />}
+      {gameStatus === Status.ERROR && <GameNotFound />}
       {gameStatus === Status.LOADING && <Loader />}
       {gameStatus === Status.SUCCESS && currentGame && (
         <div className={styles.wrapper}>
@@ -78,6 +78,7 @@ const GamePage: React.FC = () => {
           </div>
         </div>
       )}
+      {gameStatus === Status.SUCCESS && !currentGame && <GameNotFound />}
     </>
   );
 };

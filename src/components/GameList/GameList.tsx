@@ -1,14 +1,13 @@
-import { setCurrentPage } from '@/redux/filter/slice';
-import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
-import React, { useEffect } from 'react';
 import GameBlock from '@/components/GameBlock/GameBlock';
-import { Pagination } from 'antd';
-import styles from './GameList.module.css';
-import { Status } from '@/redux/game/types';
-import GamesError from '@/components/GamesError/GamesError';
-import Loader from '@/components/Loader';
-import { fetchGames } from '@/redux/game/asyncActions';
 import GamesNotFound from '@/components/GamesNotFound/GamesNotFound';
+import Loader from '@/components/Loader';
+import { setCurrentPage } from '@/redux/filter/slice';
+import { fetchGames } from '@/redux/game/asyncActions';
+import { Status } from '@/redux/game/types';
+import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
+import { Pagination } from 'antd';
+import React, { useEffect } from 'react';
+import styles from './GameList.module.css';
 
 const GameList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +16,7 @@ const GameList: React.FC = () => {
   );
   const { currentPage } = useAppSelector((state: RootState) => state.filter);
   const gamesPerPage = 15;
-  const gamesData = games.length > 0 ? games : [];
+  const gamesData = games?.length > 0 ? games : [];
   const indexOfLastGame = currentPage * gamesPerPage;
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = gamesData.slice(indexOfFirstGame, indexOfLastGame);
@@ -47,7 +46,7 @@ const GameList: React.FC = () => {
 
   return (
     <>
-      {gamesStatus === Status.ERROR && <GamesError />}
+      {gamesStatus === Status.ERROR && <GamesNotFound />}
       {gamesStatus === Status.LOADING && <Loader />}
       {gamesStatus === Status.SUCCESS && gamesData.length > 0 && (
         <>
