@@ -48,27 +48,33 @@ const GamePage: React.FC = () => {
           <div className={styles.gameDetails}>
             <h1>{currentGame.title}</h1>
             <span>Release date: {releaseDate}</span>
-            <span>Publisher: {currentGame.publisher}</span>
-            <span>Developer: {currentGame.developer}</span>
-            <span>Genre: {currentGame.genre}</span>
+            <span>Publisher: {currentGame.publisher ?? 'N/A'}</span>
+            <span>Developer: {currentGame.developer ?? 'N/A'}</span>
+            <span>Genre: {currentGame.genre ?? 'N/A'}</span>
             <div className={styles.requirements}>
               <h2>Minimum system requirements: </h2>
               <span>
-                Graphics: {currentGame.minimum_system_requirements.graphics}
-              </span>
-              <span>OS: {currentGame.minimum_system_requirements.os}</span>
-              <span>
-                Memory: {currentGame.minimum_system_requirements.memory}
+                Graphics:{' '}
+                {currentGame.minimum_system_requirements?.graphics ?? 'N/A'}
               </span>
               <span>
-                Processor: {currentGame.minimum_system_requirements.processor}
+                OS: {currentGame.minimum_system_requirements?.os ?? 'N/A'}
               </span>
               <span>
-                Storage: {currentGame.minimum_system_requirements.storage}
+                Memory:{' '}
+                {currentGame.minimum_system_requirements?.memory ?? 'N/A'}
+              </span>
+              <span>
+                Processor:{' '}
+                {currentGame.minimum_system_requirements?.processor ?? 'N/A'}
+              </span>
+              <span>
+                Storage:{' '}
+                {currentGame.minimum_system_requirements?.storage ?? 'N/A'}
               </span>
             </div>
             <h2>Description</h2>
-            <span>{currentGame.description}</span>
+            <span>{currentGame.description ?? 'N/A'}</span>
           </div>
         </div>
       )}
