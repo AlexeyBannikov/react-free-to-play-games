@@ -1,19 +1,20 @@
+import GameNotFound from '@/components/GamesNotFound/GameNotFound';
 import Loader from '@/components/Loader';
-import { fetchGame } from '@/redux/game/asyncActions';
+import ScreenshotsCarousel from '@/components/ScreenshotsCarousel';
 import { Status } from '@/redux/game/types';
 import { RootState, useAppDispatch, useAppSelector } from '@/redux/store';
+import { reverseDate } from '@/utils/reverseDate';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GamePage.module.css';
-import { reverseDate } from '@/utils/reverseDate';
-import ScreenshotsCarousel from '@/components/ScreenshotsCarousel';
-import GameNotFound from '@/components/GamesNotFound/GameNotFound';
+import { fetchGame } from '@/redux/game/asyncActions';
+import { setCurrentGame, setGameStatus } from '@/redux/game/slice';
 
 const GamePage: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { currentGame, gameStatus } = useAppSelector(
     (state: RootState) => state.game
   );
@@ -21,7 +22,42 @@ const GamePage: React.FC = () => {
   const releaseDate = reverseDate(currentGame?.release_date ?? 'N/A');
 
   useEffect(() => {
-    dispatch(fetchGame({ id: +id! }));
+    if (localStorage.getItem(String(id))) {
+      dispatch(setGameStatus(Status.SUCCESS));
+      dispatch(
+        setCurrentGame(
+          JSON.parse(localStorage.getItem(String(id))!).currentGame
+        )
+      );
+    } else {
+      dispatch(fetchGame({ id: +id! }));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (currentGame) {
+      if (!localStorage.getItem(String(currentGame.id))) {
+        localStorage.setItem(
+          String(currentGame.id),
+          JSON.stringify({ time: Date.now(), currentGame: currentGame })
+        );
+      }
+    }
+  }, [currentGame]);
+
+  useEffect(() => {
+    function checkExpire() {
+      const now = Date.now();
+      const keys = Object.keys(localStorage);
+
+      for (const key of keys) {
+        if (now - JSON.parse(localStorage.getItem(key)!).date >= 300000) {
+          localStorage.removeItem(key);
+        }
+      }
+    }
+
+    setInterval(checkExpire, 60000);
   }, []);
 
   const navigateToHome = () => {

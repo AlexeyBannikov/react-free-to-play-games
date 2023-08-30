@@ -35,8 +35,8 @@ export interface SearchGameParams {
 export interface IGameSliceState {
   games: IGame[];
   gamesStatus: Status;
-  currentGame: IGame | undefined;
-  gameStatus: Status | undefined;
+  currentGame: IGame | null;
+  gameStatus: Status | null;
 }
 
 export enum Status {

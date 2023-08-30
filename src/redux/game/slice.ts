@@ -1,18 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchGame, fetchGames } from './asyncActions';
-import { IGameSliceState, Status } from './types';
+import { IGame, IGameSliceState, Status } from './types';
 
 const initialState: IGameSliceState = {
   games: [],
   gamesStatus: Status.LOADING,
-  currentGame: undefined,
-  gameStatus: undefined,
+  currentGame: null,
+  gameStatus: null,
 };
 
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentGame(state, action: PayloadAction<IGame>) {
+      state.currentGame = action.payload;
+    },
+    setGameStatus(state, action: PayloadAction<Status>) {
+      state.gameStatus = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       //fetch all games
@@ -30,7 +37,6 @@ export const gameSlice = createSlice({
       })
       //fetch current game
       .addCase(fetchGame.pending, (state) => {
-        state.currentGame = undefined;
         state.gameStatus = Status.LOADING;
       })
       .addCase(fetchGame.fulfilled, (state, action) => {
@@ -38,10 +44,11 @@ export const gameSlice = createSlice({
         state.gameStatus = Status.SUCCESS;
       })
       .addCase(fetchGame.rejected, (state) => {
-        state.currentGame = undefined;
         state.gameStatus = Status.ERROR;
       });
   },
 });
+
+export const { setCurrentGame, setGameStatus } = gameSlice.actions;
 
 export default gameSlice.reducer;
