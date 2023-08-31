@@ -30,6 +30,7 @@ export interface SearchGameParams {
   genre?: string | null;
   sortBy?: string;
   page?: number;
+  controller: AbortController;
 }
 
 export interface IGameSliceState {

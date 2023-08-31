@@ -25,17 +25,17 @@ const GameList: React.FC = () => {
   );
 
   useEffect(() => {
-    return () => {
-      console.log(1);
-    };
-  }, []);
-
-  useEffect(() => {
     const platform = currentPlatform.platformProperty;
     const genre = currentGenre.genreProperty;
     const sortBy = currentSort.sortProperty;
 
-    dispatch(fetchGames({ platform, genre, sortBy }));
+    const controller = new AbortController();
+
+    dispatch(fetchGames({ controller, platform, genre, sortBy }));
+
+    return () => {
+      controller.abort();
+    };
   }, [
     currentPlatform.platformProperty,
     currentGenre.genreProperty,

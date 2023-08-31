@@ -5,12 +5,13 @@ import { SearchGameParams, IGame } from './types';
 export const fetchGames = createAsyncThunk<IGame[], SearchGameParams>(
   'game/fetchGamesStatus',
   async (params) => {
-    const { platform, genre, sortBy } = params;
+    const { controller, platform, genre, sortBy } = params;
     let retryCount = 3;
 
     while (retryCount > 0) {
       try {
         const { data } = await http.get('/games', {
+          signal: controller.signal,
           params: { platform, category: genre, 'sort-by': sortBy },
         });
 
@@ -22,22 +23,23 @@ export const fetchGames = createAsyncThunk<IGame[], SearchGameParams>(
   }
 );
 
-export const fetchGame = createAsyncThunk<IGame, { id: number }>(
-  'game/fetchGameStatus',
-  async (params) => {
-    const { id } = params;
-    let retryCount = 3;
+export const fetchGame = createAsyncThunk<
+  IGame,
+  { id: number; controller: AbortController }
+>('game/fetchGameStatus', async (params) => {
+  const { controller, id } = params;
+  let retryCount = 3;
 
-    while (retryCount > 0) {
-      try {
-        const { data } = await http.get('/game', {
-          params: { id },
-        });
+  while (retryCount > 0) {
+    try {
+      const { data } = await http.get('/game', {
+        signal: controller.signal,
+        params: { id },
+      });
 
-        return data;
-      } catch (error) {
-        retryCount--;
-      }
+      return data;
+    } catch (error) {
+      retryCount--;
     }
   }
-);
+});

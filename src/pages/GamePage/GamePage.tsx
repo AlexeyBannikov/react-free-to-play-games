@@ -22,6 +22,8 @@ const GamePage: React.FC = () => {
   const releaseDate = reverseDate(currentGame?.release_date ?? 'N/A');
 
   useEffect(() => {
+    const controller = new AbortController();
+
     if (
       localStorage.getItem(String(id)) &&
       new Date().getTime() -
@@ -36,8 +38,12 @@ const GamePage: React.FC = () => {
       );
     } else {
       localStorage.removeItem(String(id));
-      dispatch(fetchGame({ id: +id! }));
+      dispatch(fetchGame({ controller, id: +id! }));
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [dispatch]);
 
   useEffect(() => {
