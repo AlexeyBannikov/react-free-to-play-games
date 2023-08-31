@@ -1,7 +1,7 @@
 export enum SortPropertyEnum {
   RELEVANCE = 'relevance',
   POPULARITY = 'popularity',
-  RELEASE_DATE = 'release_date',
+  RELEASE_DATE = 'release-date',
   ALPHABETICAL = 'alphabetical',
 }
 
