@@ -25,6 +25,12 @@ const GameList: React.FC = () => {
   );
 
   useEffect(() => {
+    return () => {
+      console.log(1);
+    };
+  }, []);
+
+  useEffect(() => {
     const platform = currentPlatform.platformProperty;
     const genre = currentGenre.genreProperty;
     const sortBy = currentSort.sortProperty;
